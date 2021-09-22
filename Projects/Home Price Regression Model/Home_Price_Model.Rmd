@@ -1,0 +1,57 @@
+---
+title: "Home Price Model"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r cars}
+#This section of the code focused on looking at correlations between predictors, doing different regressions to find a preliminary model, and conducting an F-test to see if Age and Age^2 should be included. It also contains analysis of the final model.
+rm(list = ls())
+library(readxl)
+library(olsrr)
+homeprice <- read_excel("C:/Users/Daniel Huang/Desktop/Junior/IE Project/homeprice (1).xls")
+homeprice2 <- subset(homeprice, select = -c(id, elem, status, year, agesq, bathbed))
+View(homeprice)
+
+#Correlation between predictors
+numeric_data <- subset(homeprice, select = c(price, size, lot, bath, bed, age, garage))
+cor(numeric_data)
+plot(cor(numeric_data))
+pairs(numeric_data)
+
+#Forward Stepwise Regression with R^2
+model <- lm(price ~ ., data = homeprice2)
+summary(ols_step_both_p(model))
+
+#Backward Regression
+ols_step_backward_p(model, details = TRUE)
+
+#Forward Regression
+model2 <- lm(price ~ ., data = homeprice2)
+ols_step_forward_p(model2, details = TRUE)
+
+#Preliminary Model
+model2 <- lm(price~garage+edison+harris+lot+active+size+age,data=homeprice2)
+additive_mod <- lm(price~garage+edison+harris+lot+active+size+age+agesq,data=homeprice)
+anova(additive_mod)
+
+#F-test with age and age^2
+age_only <- lm(price~age,data=homeprice)
+withagesq <- lm(price~age + agesq,data=homeprice)
+anova(withagesq)
+Fcrit <- qf(0.95, 1, 73)
+summary(model2)   
+plot(model2)     
+
+#Final Model
+final_mod <- lm(price~garage+edison+harris+lot+active+size+age+agesq+bath+bed+bathbed,data=homeprice)
+summary(final_mod)
+plot(final_mod)
+
+```
+The code in this box is the code used to plot the residuals vs fitted values of our final model, the code run for our outlier analysis, and the code used to run our AIC and BIC model selection.
