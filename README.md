@@ -13,3 +13,6 @@ I worked to create a multilinear regression model in R to predict home prices in
 
 
 # Coding Samples
+
+## Lyric Finder
+R function to pull lyric, album, and song artist from mldb.org based on a song and title. Utilizes string manitpulation to build the get request URL for the desired page, then uses the rvest package to scrape the desired data.
