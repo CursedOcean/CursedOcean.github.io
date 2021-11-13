@@ -2,7 +2,10 @@
 
 Welcome to my Github! 
 
-My name is Daniel Huang, and I am 21 years old. I am currently a first year M.A. student studying Statistics at UC Berkeley, and I graduated from UMass Amherst with a B.S. in Statistics and minor in Computer Science. I'm passionate about using data to solve problems and gain valuable insights. I have passed Actuarial Exams P and FM, and have worked with mostly P&C insurance data through my 2 internships with Travelers Insurance. I'm eager to expand my horizons and am excited to see what types of data I can work with next!
+My name is Daniel Huang, and I am 21 years old. I am currently a first year M.A. student studying Statistics at UC Berkeley, and I graduated from UMass Amherst with a B.S. in Statistics and minor in Computer Science. I'm passionate about using data to solve problems and gain valuable insights. I have passed Actuarial Exams P and FM, and have worked with mostly P&C insurance data through my 2 internships with Travelers Insurance. I'm eager to expand my horizons and am excited to see what types of data I can work with next! Please feel free to look around at my projects and coding samples to get an idea of what skills I have and what I'm passionate about. You can reach out to me at dhuang172@gmail.com if you're interested in working together!
+
+## Technical Skills
+I am fluent in R, Python, and SQL, with academic experience using Java, C++, and Unix-style environments. I'm familiar with most R packages, including dplyr, ggplot2, and the rest of the tidyverse. In Python, I have worked with Numpy, Pandas, and briefly with some machine learning packages from scikit-learn. I have corporate experience with ArcGIS, as well as the standard suite of Microsoft tools (Excel, Word, and Powerpoint). I'm eager to learn, and willing to work hard to pick up new skills.
 
 # Projects
 ## Honors Thesis
