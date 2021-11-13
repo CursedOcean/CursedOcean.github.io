@@ -19,3 +19,10 @@ R function to pull lyric, album, and song artist from mldb.org based on a song a
 
 ## State of the Union Speech Webscraper
 R function to pull information about the State of the Union speeches from the UCSB database. Utilizes lapply to vectorize data cleaning and extraction for each speech. We build a data frame of speeches with the President, date, as well as key metrics about the speech such as word count and average word length. The unspoken parts of the body of the speech are stripped and saved, and the body of the speech is prepared for analysis. Using Regex, we find words/wordstems of interest and calculate their frequencies. This allows us to see the progression of certain metrics of interest over time. We also allow grouping by political party. Packages used include stringr, dplyr, and rvest.
+
+## Remote Linux Cluster Parallelization using R
+R and Bash code to utilize UC Berkeley's remote SCF Cluster to perform parallelized processing of Wikipedia data related to Barack Obama. Utilized the Futures package in R in order to read in and process Wikipedia data in parallel remotely. Results stored in Obama2.csv, and brief analysis done. Next coding sample has more in-depth analysis and results.
+
+## Remote Linux Cluster Parallelization using Dask in Python
+R, Bash, and Python code again using UC Berkeleyh's remote SCF Cluster to performed parallelized processing of Wikipedia data related to Barack Obama, specifically from Aug 2008 to Dec 2008, when he became president for the first time. Roughly 120 GB of zipped data are processed in parallel using Python's Dask package, and the number of hits on pages containing 'Barack_Obama' is aggregated for each Day-Hour from Aug 1 2008 to Dec 31 2008. The data are then exported as a csv to be analyzed in R with graphs using the ggplot2 package.
+
