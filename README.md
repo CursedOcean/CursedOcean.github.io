@@ -11,6 +11,10 @@ I am fluent in R, Python, and SQL, with academic experience using Java, C++, and
 ## Honors Thesis
 I wrote my honors thesis supervised by Professor Panagiota Birmpa and Professor Markos Katsoulakis on Uncertainty Quantification in Conditional Random Field Models for Optical Character Recognition. My thesis uses uncertainty quantification techniques, specifically utilizing the Donsker-Varadhan Representation of the KL-Divergence as a measurement of the distance between my base model built in Python with other models. 
 
+## Genetic Algorithm Variable Selection Package for Linear Models and GLMs in R
+*Work in progress*
+Installable R Package named GA that does genetic algorithm variable selection for a user. Users will be able to provide inputs, as well as the desired variable selection criterion, and have a model fitted for using a genetic algorithm.
+
 ## Home Pricing Model
 I worked to create a multilinear regression model in R to predict home prices in Oregon utilizing both quantitative and qualitative predictors. After performing preliminary data exploration to find relationships between predictors, I implemented techniques such as Stepwise AIC and BIC regression, F-tests, and outlier analysis to create the final model. My model was able to predict 60% of the variation in home prices given the data.
 
