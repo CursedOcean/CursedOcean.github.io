@@ -13,7 +13,8 @@ I wrote my honors thesis supervised by Professor Panagiota Birmpa and Professor 
 
 ## Genetic Algorithm Variable Selection Package for Linear Models and GLMs in R
 *Work in progress*
-Installable R Package named GA that does genetic algorithm variable selection for a user. Users will be able to provide inputs, as well as the desired variable selection criterion, and have a model fitted for using a genetic algorithm.
+
+Installable R Package named GA that does genetic algorithm variable selection for LM and GLM models. Variable selection will be done using the AIC criterion, or a user-inputted function. Other user-inputted features include crossover functions, mutation rate, and other selection algorithm options. Unit testing and full examples included to demonstrate utilization of the package, as well as documentation created using the roxygen2 package.
 
 ## Home Pricing Model
 I worked to create a multilinear regression model in R to predict home prices in Oregon utilizing both quantitative and qualitative predictors. After performing preliminary data exploration to find relationships between predictors, I implemented techniques such as Stepwise AIC and BIC regression, F-tests, and outlier analysis to create the final model. My model was able to predict 60% of the variation in home prices given the data.
@@ -33,3 +34,5 @@ R and Bash code to utilize UC Berkeley's remote SCF Cluster to perform paralleli
 ## Remote Linux Cluster Parallelization using Dask in Python
 R, Bash, and Python code again using UC Berkeley's remote SCF Cluster to performed parallelized processing of Wikipedia data related to Barack Obama, specifically from Aug 2008 to Dec 2008, when he became president for the first time. Roughly 120 GB of zipped data are processed in parallel using Python's Dask package, and the number of hits on pages containing 'Barack_Obama' is aggregated for each Day-Hour from Aug 1 2008 to Dec 31 2008. The data are then exported as a csv to be analyzed in R with graphs using the ggplot2 package.
 
+## EM Algorithm for Censored Regression
+R code implementing EM Algorithm for simple linear regression with right censored data i.e. for y values greater than some c, we only have the censored value c not the actual value. We utilize the expectation-maximization algorithm in order to average over these unknown data in our regression process. Results compared to direct optimization of the log-likelihood for normal regression coefficients.
