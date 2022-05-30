@@ -1,0 +1,255 @@
+---
+title: "Fraud_EDA"
+author: "Daniel Huang"
+date: "3/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+Loading data:
+
+```{r}
+transaction_train <- read.csv(file = "~/Berkeley_S22/Stat_222/Fraud_Data/train_transaction.csv")
+identity_train <- read.csv(file = "~/Berkeley_S22/Stat_222/Fraud_Data/train_identity.csv")
+```
+
+Merges:
+
+```{r}
+merged <- merge(transaction_train, identity_train, by = "TransactionID", )
+```
+
+```{r}
+no_id <- subset(transaction_train,!(TransactionID %in% 
+                                      identity_train$TransactionID))
+```
+
+Graphs:
+
+```{r}
+#Credit card company
+require(scales)
+no_id %>%
+  ggplot(aes(x=card4)) + 
+  geom_bar(fill = "#FF6666") + facet_wrap(vars(isFraud), labeller = labeller(isFraud = c("0" = "Not Fraud", "1" = "Fraud")), scales = "free") +
+  labs(y = "Count", x = "Company", title = "Fraud by Credit Card Company") + 
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  scale_y_continuous(labels = comma)
+
+merged %>%
+  ggplot(aes(x=card4)) + 
+  geom_bar(fill = "#FF6666") + facet_wrap(vars(isFraud), labeller = labeller(isFraud = c("0" = "Not Fraud", "1" = "Fraud")), scales = "free") +
+  labs(y = "Count", x = "Company", title = "Fraud by Credit Card Company") + 
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  scale_y_continuous(labels = comma)
+
+#Product Type
+no_id %>%
+  ggplot(aes(x=ProductCD)) + 
+  geom_bar(fill = "#FF6666") + facet_wrap(vars(isFraud), labeller = labeller(isFraud = c("0" = "Not Fraud", "1" = "Fraud")), scales = "free") +
+  labs(y = "Count", x = "Code", title = "Fraud by Product Code") + 
+  scale_y_continuous(labels = comma) + 
+  theme_classic()
+
+merged %>%
+  ggplot(aes(x=ProductCD)) + 
+  geom_bar(fill = "#FF6666") + facet_wrap(vars(isFraud), labeller = labeller(isFraud = c("0" = "Not Fraud", "1" = "Fraud")), scales = "free") +
+  labs(y = "Count", x = "Code", title = "Fraud by Product Code") + 
+  scale_y_continuous(labels = comma) + 
+  theme_classic()
+```
+
+
+```{r}
+#Transaction Amount
+merged %>%
+  ggplot(aes(x=TransactionAmt)) + 
+  geom_histogram(aes(y = ..density..), bins = 500, fill = "red") +
+  scale_fill_manual(values = c("red", "blue")) + 
+facet_wrap(vars(isFraud), labeller = labeller(isFraud = c("0" = "Not Fraud", "1" = "Fraud"))) +
+  labs(y = "Density", x = "Transaction Amount", title = "Fraud by Transaction Amount") + 
+  xlim(0, 2500) + 
+  theme_classic()
+
+no_id %>%
+  ggplot(aes(x=TransactionAmt)) + 
+  geom_histogram(aes(y = ..density..), bins = 500, fill = "red") +
+  scale_fill_manual(values = c("red", "blue")) + 
+facet_wrap(vars(isFraud), labeller = labeller(isFraud = c("0" = "Not Fraud", "1" = "Fraud"))) +
+  labs(y = "Density", x = "Transaction Amount", title = "Fraud by Transaction Amount") + 
+  xlim(0, 2500) + 
+  theme_classic()
+
+#Boxplot
+merged %>%
+  filter(TransactionAmt <= 1000) %>%
+  mutate(fraud_factor = factor(isFraud)) %>%
+  ggplot(aes(x=fraud_factor, y=TransactionAmt)) +
+  geom_boxplot(aes(fill = fraud_factor)) + 
+  theme_classic() +
+  labs(y = "Transaction Amount", x = "Fraud", title = "Fraud by Transaction Amount", fill = "Fraud") + 
+  coord_flip()
+
+no_id %>%
+  filter(TransactionAmt <= 1000) %>%
+  mutate(fraud_factor = factor(isFraud)) %>%
+  ggplot(aes(x=fraud_factor, y=TransactionAmt)) +
+  geom_boxplot(aes(fill = fraud_factor)) + 
+  theme_classic() +
+  labs(y = "Transaction Amount", x = "Fraud", title = "Fraud by Transaction Amount", fill = "Fraud") + 
+  coord_flip()
+  
+  
+ 
+```
+
+Graphs:
+
+```{r}
+#Credit card company
+require(scales)
+transaction_train %>%
+  ggplot(aes(x=card4)) + 
+  geom_bar(fill = "#FF6666") + facet_wrap(vars(isFraud), labeller = labeller(isFraud = c("0" = "Not Fraud", "1" = "Fraud")), scales = "free") +
+  labs(y = "Count", x = "Company", title = "Fraud by Credit Card Company") + 
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  scale_y_continuous(labels = comma)
+
+#Product Type
+transaction_train %>%
+  ggplot(aes(x=ProductCD)) + 
+  geom_bar(fill = "#FF6666") + facet_wrap(vars(isFraud), labeller = labeller(isFraud = c("0" = "Not Fraud", "1" = "Fraud")), scales = "free") +
+  labs(y = "Count", x = "Code", title = "Fraud by Product Code") + 
+  scale_y_continuous(labels = comma) + 
+  theme_classic()
+```
+```{r}
+#Transaction Amount
+transaction_train %>%
+  ggplot(aes(x=TransactionAmt)) + 
+  geom_histogram(aes(y = ..density..), bins = 500, fill = "red") +
+  scale_fill_manual(values = c("red", "blue")) + 
+facet_wrap(vars(isFraud), labeller = labeller(isFraud = c("0" = "Not Fraud", "1" = "Fraud"))) +
+  labs(y = "Density", x = "Transaction Amount", title = "Fraud by Transaction Amount") + 
+  xlim(0, 2500) + 
+  theme_classic()
+
+#Boxplot
+transaction_train %>%
+  filter(TransactionAmt <= 1000) %>%
+  mutate(fraud_factor = factor(isFraud)) %>%
+  ggplot(aes(x=fraud_factor, y=TransactionAmt)) +
+  geom_boxplot(aes(fill = fraud_factor)) + 
+  theme_classic() +
+  labs(y = "Transaction Amount", x = "Fraud", title = "Fraud by Transaction Amount", fill = "Fraud") + 
+  coord_flip()
+  
+ 
+#Log Transaction Amount
+transaction_train2 <- transaction_train %>%
+  mutate(log_amt = log(TransactionAmt))
+transaction_train2 %>%
+  ggplot(aes(x=log_amt)) + 
+  geom_histogram(aes(y = ..density..), bins = 500) + facet_wrap(vars(isFraud), labeller = labeller(isFraud = c("0" = "Not Fraud", "1" = "Fraud"))) +
+  labs(y = "Density", x = "Log of Amount", title = "Fraud by Log of Transaction Amount")
+
+#Log Transaction Amount summary statistics
+transaction_train2 %>% 
+  group_by(isFraud) %>%
+  summarise(mean = mean(log_amt), 
+            sd = sd(log_amt),
+            q1 = quantile(log_amt, 0.25),
+            med = median(log_amt), 
+            q3 = quantile(log_amt, 0.75))
+
+#Summary statistics for transaction amount
+transaction_train2 %>% 
+  group_by(isFraud) %>%
+  summarise(mean = mean(TransactionAmt), 
+            sd = sd(TransactionAmt),
+            q1 = quantile(TransactionAmt, 0.25),
+            med = median(TransactionAmt), 
+            q3 = quantile(TransactionAmt, 0.75))
+```
+
+```{r}
+#Card6 (card type)
+transaction_train %>%
+  filter(card6 %in% c("credit", "debit")) %>%
+  ggplot(aes(x=card6)) + 
+  geom_bar() + facet_wrap(vars(isFraud), labeller = labeller(isFraud = c("0" = "Not Fraud", "1" = "Fraud")), scales = "free") +
+  labs(y = "Count", x = "Card Type", title = "Fraud by Card Type") + 
+  theme(axis.text.x = element_text(angle = 90))
+
+#P_emaildomain
+transaction_train %>% 
+  group_by(P_emaildomain) %>%
+  summarise(count = n()) %>% 
+  arrange(desc(count))
+
+transaction_train %>%
+  filter(P_emaildomain %in% c("gmail.com", "yahoo.com", "hotmail.com", "anonymous.com", "aol.com", "")) %>%
+  ggplot(aes(x=P_emaildomain)) + 
+  geom_bar() + facet_wrap(vars(isFraud), labeller = labeller(isFraud = c("0" = "Not Fraud", "1" = "Fraud")), scales = "free") +
+  labs(y = "Count", x = "Email Domain", title = "Fraud by Payer Email Domain") + 
+  theme(axis.text.x = element_text(angle = 90))
+
+#R_emaildomain
+transaction_train %>% 
+  group_by(R_emaildomain) %>%
+  summarise(count = n()) %>% 
+  arrange(desc(count))
+
+transaction_train %>%
+  filter(R_emaildomain %in% c("gmail.com", "yahoo.com", "hotmail.com", "anonymous.com", "aol.com")) %>%
+  ggplot(aes(x=R_emaildomain)) + 
+  geom_bar() + facet_wrap(vars(isFraud), labeller = labeller(isFraud = c("0" = "Not Fraud", "1" = "Fraud")), scales = "free") +
+  labs(y = "Count", x = "Email Domain", title = "Fraud by Recipient Email Domain") + 
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+```{r}
+#C3
+transaction_train %>%
+  mutate(C3.factor = factor(C3)) %>%
+  ggplot(aes(x=C3.factor)) + 
+  geom_bar() + facet_wrap(vars(isFraud), labeller = labeller(isFraud = c("0" = "Not Fraud", "1" = "Fraud"))) +
+  labs(y = "Count", x = "Card Type", title = "Fraud by Card Type") + 
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+```{r}
+transaction_train %>%
+  summarise(median(TransactionAmt))
+
+merged %>%
+  summarise(median(TransactionAmt))
+
+no_id %>%
+  summarise(median(TransactionAmt))
+
+transaction_train %>% 
+  mutate(log_amt = log(TransactionAmt)) %>%
+  summarise(mean = mean(log_amt), sd = sd(log_amt))
+
+CI_log <- c(4.363864 - 1.96*0.9540369/sqrt(590540), 4.363864 + 1.96*0.9540369/sqrt(590540))
+CI <- exp(CI_log)
+
+CI2 <- 0.035 * (0.852 - 0.675) * CI
+
+transaction_train2 <- transaction_train %>%
+  mutate(log_amt = log(TransactionAmt))
+```
+
+
+
+
+
+
+
