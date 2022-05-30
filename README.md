@@ -9,6 +9,11 @@ I am fluent in R, Python, and SQL, with academic experience using Java, C++, and
 
 # Projects
 ## Master's Capstone
+My capstone project is titled Credit Card Fraud Detection Using Machine Learning Methods. Using a Kaggle dataset (https://www.kaggle.com/competitions/ieee-fraud-detection/overview), my team and I built Logistic Regression and Random Forest models to detect fraudulent transactions. We utilized identity information about users that other Kagglers had not done before, and were able to show that our models that utilized this identity information performed better than models without. We were further able to quantify this improvement and provide a business recommendation as to how much companies would save by having identity information for a given transaction. Our code is in a Jupyter Notebook and the attached writeup is included as well.
+
+## Housing, Health, and Happiness Replication Paper
+I carried out a replication of the results found in the paper Housing, Health, and Happiness by Catteano et al. By rewriting the code using R and re-running all of their analysis using provided data, I was able to replicate their results as well as robustness checks. Furthermore, I conducted additional analysis using leave-one-out-errors as well as leverage score analysis. While the leave-one-out-errors were fairly robust, I found that there were a few specific data points that had extremely high leverage, and leaving them out dramatically altered some of the results, specifically the cluster robust standard errors. The writeup is attached with code at the end.
+
 ## Honors Thesis
 I wrote my honors thesis supervised by Professor Panagiota Birmpa and Professor Markos Katsoulakis on Uncertainty Quantification in Conditional Random Field Models for Optical Character Recognition. My thesis uses uncertainty quantification techniques, specifically utilizing the Donsker-Varadhan Representation of the KL-Divergence as a measurement of the distance between my base model built in Python with other models. 
 
