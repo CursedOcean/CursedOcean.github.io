@@ -1,0 +1,1 @@
+In this folder you will find the 2 notebooks we used for analysis on the data, the Rmd we used for EDA, as well as the final writeup. Please read the writeup first to get a general idea of the project. The notebooks operate on the merged and unmerged datasets respectively. The data can be found from the Kaggle competition. 
